@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Questão 1: [1 ponto]
 #  Crie uma simulação utilizando o algoritmo de escalonamento Round Robin. Dado N processos com
@@ -19,16 +20,16 @@ import numpy as np
 # Simulação do Algoritmo Round Robin
 
 processos = ["Processo 1", "Processo 2", "Processo 3", "Processo 4"]
-burst_times = [10, 5, 8, 6]
-lista_de_quantum = [4, 6]
-
-numero_de_processos = len(processos)
-burst_restante = burst_times.copy()
-tempos_de_espera = [0] * numero_de_processos
-tempos_de_retorno = [0] * numero_de_processos
-sequencia_de_execucao = []
+burst_times = [1, 4, 25, 35]
+lista_de_quantum = [2, 8, 24]
 
 def round_robin_com_metricas(each_quantum):
+    numero_de_processos = len(processos)
+    burst_restante = burst_times.copy()
+    tempos_de_espera = [0] * numero_de_processos
+    tempos_de_retorno = [0] * numero_de_processos
+    sequencia_de_execucao = []
+
     tempo = 0
 
     while any(burst_restante):
@@ -76,3 +77,40 @@ for quantum in lista_de_quantum:
     print(f"Tempo médio de espera do Quantum: {tempo_medio_de_espera_do_quantum:.2f} +/- {desvio_padrao_do_tempo_de_espera_do_quantum:.2f}")
     print(f"Tempo médio de retorno do Quantum: {tempo_medio_de_retorno_do_quantum:.2f} +/- {desvio_padrao_do_tempo_de_retorno_do_quantum:.2f}")
     print(f"Vazão do Quantum: {vazao_do_quantum:.2f} processos/unidade de tempo")
+
+    # Plotando métricas
+    quantum_labels = [str(q) for q in lista_de_quantum]
+    tempos_espera_media = [tempo_medio_de_espera_do_quantum for q in lista_de_quantum]
+    tempos_retorno_media = [tempo_medio_de_retorno_do_quantum for q in lista_de_quantum]
+    vazoes = [vazao_do_quantum for q in lista_de_quantum]
+
+    x = np.arange(len(lista_de_quantum))  # Posição para os gráficos
+    width = 0.4
+
+    # Gráfico 1: Tempo Médio de Espera e Retorno
+    plt.figure(figsize=(4, 4))
+
+    plt.bar(x - width / 2, tempos_espera_media, width, label="Tempo Médio de Espera")
+    plt.bar(x + width / 2, tempos_retorno_media, width, label="Tempo Médio de Retorno")
+
+    plt.xlabel("Quantum")
+    plt.ylabel("Tempo (unidades)")
+    plt.title("Tempos Médios de Espera e Retorno para Diferentes Quantum")
+    plt.xticks(x, quantum_labels)
+    plt.legend()
+    plt.grid()
+
+    plt.show()
+
+    # Gráfico 2: Vazão
+    plt.figure(figsize=(4, 4))
+
+
+
+    plt.bar(quantum_labels, vazoes, color='skyblue')
+    plt.xlabel("Quantum")
+    plt.ylabel("Vazão (processos/unidade de tempo)")
+    plt.title("Vazão para Diferentes Quantum")
+    plt.grid()
+
+    plt.show()
