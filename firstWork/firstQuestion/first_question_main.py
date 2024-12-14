@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from firstWork.firstQuestion.round_robin import round_robin_com_metricas
+
 # Questão 1: [1 ponto]
 #  Crie uma simulação utilizando o algoritmo de escalonamento Round Robin. Dado N processos com
 #  diferentes burst time, analise as métricas tempo médio de espera, tempo médio de retorno e vazão
@@ -23,45 +25,6 @@ processos = ["Processo 1", "Processo 2", "Processo 3", "Processo 4"]
 burst_times = [1, 4, 25, 35]
 lista_de_quantum = [2, 8, 24]
 
-def round_robin_com_metricas(each_quantum):
-    numero_de_processos = len(processos)
-    burst_restante = burst_times.copy()
-    tempos_de_espera = [0] * numero_de_processos
-    tempos_de_retorno = [0] * numero_de_processos
-    sequencia_de_execucao = []
-
-    tempo = 0
-
-    while any(burst_restante):
-        for i in range(numero_de_processos):
-            if burst_restante[i] > 0:
-                sequencia_de_execucao.append(processos[i])
-                tempo_de_execucao = min(each_quantum, burst_restante[i])
-                tempo += tempo_de_execucao
-                burst_restante[i] -= tempo_de_execucao
-
-                for j in range(numero_de_processos):
-                    if j != i and burst_restante[j] > 0:
-                        tempos_de_espera[j] += tempo_de_execucao
-
-                if burst_restante[i] == 0:
-                    tempos_de_retorno[i] = tempo
-
-                tempo += 1
-
-    tempo_medio_de_espera = np.mean(tempos_de_espera)
-    desvio_padrao_do_tempo_de_espera = np.std(tempos_de_espera)
-    tempo_medio_de_retorno = np.mean(tempos_de_retorno)
-    desvio_padrao_do_tempo_de_retorno = np.std(tempos_de_retorno)
-    vazao = numero_de_processos / tempo
-
-    return (sequencia_de_execucao,
-            tempo_medio_de_espera,
-            desvio_padrao_do_tempo_de_espera,
-            tempo_medio_de_retorno,
-            desvio_padrao_do_tempo_de_retorno,
-            vazao)
-
 for quantum in lista_de_quantum:
     print(f"\nResultados para o determinado Quantum: {quantum}")
     print()
@@ -71,7 +34,7 @@ for quantum in lista_de_quantum:
      desvio_padrao_do_tempo_de_espera_do_quantum,
      tempo_medio_de_retorno_do_quantum,
      desvio_padrao_do_tempo_de_retorno_do_quantum,
-     vazao_do_quantum) = round_robin_com_metricas(quantum)
+     vazao_do_quantum) = round_robin_com_metricas(quantum, processos, burst_times)
 
     print(f"Sequência de execução do Quantum: {sequencia_de_execucao_do_quantum}")
     print(f"Tempo médio de espera do Quantum: {tempo_medio_de_espera_do_quantum:.2f} +/- {desvio_padrao_do_tempo_de_espera_do_quantum:.2f}")
