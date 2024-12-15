@@ -11,7 +11,7 @@ import random
 #       Leitura recomendada:
 #           COURTOIS, Pierre-Jacques; HEYMANS, Frans; PARNAS, David Lorge . Concurrent control with
 #           “readers” and “writers”. Communications of the ACM, v. 14, n. 10, p. 667-668, 1971.
-z
+
 numero_de_leitores = 5
 numero_de_escritores = 3
 tempo_de_simulacao = 10
