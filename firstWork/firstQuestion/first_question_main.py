@@ -41,13 +41,12 @@ for quantum in lista_de_quantum:
     print(f"Tempo médio de retorno do Quantum: {tempo_medio_de_retorno_do_quantum:.2f} +/- {desvio_padrao_do_tempo_de_retorno_do_quantum:.2f}")
     print(f"Vazão do Quantum: {vazao_do_quantum:.2f} processos/unidade de tempo")
 
-    # Plotando métricas
     quantum_labels = [str(q) for q in lista_de_quantum]
     tempos_espera_media = [tempo_medio_de_espera_do_quantum for q in lista_de_quantum]
     tempos_retorno_media = [tempo_medio_de_retorno_do_quantum for q in lista_de_quantum]
     vazoes = [vazao_do_quantum for q in lista_de_quantum]
 
-    x = np.arange(len(lista_de_quantum))  # Posição para os gráficos
+    x = np.arange(len(lista_de_quantum))
     width = 0.4
 
     # Gráfico 1: Tempo Médio de Espera e Retorno
@@ -67,8 +66,6 @@ for quantum in lista_de_quantum:
 
     # Gráfico 2: Vazão
     plt.figure(figsize=(4, 4))
-
-
 
     plt.bar(quantum_labels, vazoes, color='skyblue')
     plt.xlabel("Quantum")
