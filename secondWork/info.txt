@@ -1,0 +1,6 @@
+- Information about Working Set -
+
+Working Set length: 3000
+Base Working Set: ['I/O 1', 'I/O 2', 'Checking File 1', 'I/O 3', 'Checking File 2']
+Proportion of the Working Set: [0.3, 0.2, 0.3, 0.1, 0.1]
+Trend List of the Working Set: Counter({'I/O 1': 908, 'Checking File 1': 838, 'I/O 2': 618, 'Checking File 2': 332, 'I/O 3': 304})
