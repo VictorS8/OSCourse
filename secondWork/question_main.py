@@ -48,10 +48,9 @@ Desvantagem: Mais complexo de implementar e consome mais recursos computacionais
 #   3 - Variar entrar algoritmo FIFO e Envelhecimento
 
 numero_de_molduras = 15
-
 lista_base_do_conjunto_de_trabalho = ["I/O 1", "I/O 2", "Checking File 1", "I/O 3", "Checking File 2"]
-frequencia_de_tendencia = [0.3, 0.2, 0.3, 0.1, 0.1]
-tamanho_do_conjunto_de_trabalho = 3000
+frequencia_de_tendencia = [0.5, 0.2, 0.2, 0.4, 0.3]
+tamanho_do_conjunto_de_trabalho = 1000
 
 conjunto_de_trabalho = gerar_lista_grande(lista_pequena= lista_base_do_conjunto_de_trabalho,
                                           proporcoes= frequencia_de_tendencia,
@@ -59,13 +58,12 @@ conjunto_de_trabalho = gerar_lista_grande(lista_pequena= lista_base_do_conjunto_
 
 lista_de_tendencia_do_conjunto_de_trabalho = Counter(conjunto_de_trabalho)
 
-print(conjunto_de_trabalho)
-
 with open(file= 'info.txt', mode= 'w') as file:
     file.write('- Information about Working Set -\n\n')
 
 with open(file= 'info.txt', mode= 'a') as file:
     file.write(f'Working Set length: {len(conjunto_de_trabalho)}\n')
     file.write(f'Base Working Set: {lista_base_do_conjunto_de_trabalho}\n')
+    file.write(f'Full Working Set: {conjunto_de_trabalho}\n')
     file.write(f'Proportion of the Working Set: {frequencia_de_tendencia}\n')
     file.write(f'Trend List of the Working Set: {lista_de_tendencia_do_conjunto_de_trabalho}\n')
